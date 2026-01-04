@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+
+  <title>
+    Valutaomvandlare – Växla euro, dollar och kronor med aktuella växelkurser
+  </title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description"
+        content="Enkel valutaomvandlare med aktuella växelkurser. Konvertera EUR, USD, SEK, NOK och andra valutor direkt online.">
+
+  <meta name="keywords"
+        content="valutaomvandlare, växelkurs, EUR till SEK, USD till EUR, NOK till SEK, konvertera valuta, realtids växelkurs">
+
+  <link rel="canonical" href="https://OMA-DOMAIN.fi/sv/" />
+
+  <link rel="alternate" hreflang="fi" href="https://OMA-DOMAIN.fi/" />
+  <link rel="alternate" hreflang="sv" href="https://OMA-DOMAIN.fi/sv/" />
+  <link rel="alternate" hreflang="en" href="https://OMA-DOMAIN.fi/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://OMA-DOMAIN.fi/sv/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title"
+        content="Valutaomvandlare – Aktuella växelkurser" />
+  <meta property="og:description"
+        content="Valutaomvandlare med uppdaterade växelkurser för euro, dollar, kronor och många andra valutor." />
+  <meta property="og:url" content="https://OMA-DOMAIN.fi/sv/" />
+  <meta property="og:site_name" content="Valutaomvandlare" />
+
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <main class="page">
+
+    <header class="page-header">
+      <h1 class="site-title">Valutaomvandlare</h1>
+      <p class="site-subtitle">
+        Konvertera valutor med aktuella växelkurser (Frankfurter API).
+      </p>
+    </header>
+
+    <section class="converter-card" aria-label="Valutaomvandlare">
+      <form class="converter-form" onsubmit="return false;">
+        <section class="row">
+          <section class="field">
+            <label for="amount">Belopp</label>
+            <input
+              type="number"
+              id="amount"
+              min="0"
+              step="0.01"
+              value="100"
+              autocomplete="off"
+            />
+          </section>
+        </section>
+
+        <section class="row two-columns">
+          <!-- Från-valuta -->
+          <section class="field">
+            <label>Från valuta</label>
+            <section
+              class="currency-field"
+              data-role="currency-field"
+              data-type="from"
+            >
+              <button
+                type="button"
+                class="currency-toggle"
+                aria-haspopup="listbox"
+                aria-expanded="false"
+              >
+                <span class="currency-toggle-main">
+                  <span class="currency-toggle-code" data-current-code="from">
+                    EUR
+                  </span>
+                  <span class="currency-toggle-name" data-current-name="from">
+                    Euro
+                  </span>
+                </span>
+                <span class="currency-toggle-caret">▾</span>
+              </button>
+
+              <section class="currency-dropdown" hidden>
+                <label class="currency-search-label">
+                  <span>Sök valuta</span>
+                  <input
+                    type="text"
+                    class="currency-search"
+                    placeholder="t.ex. EUR, euro, krona..."
+                    autocomplete="off"
+                  />
+                </label>
+
+                <section
+                  class="currency-list"
+                  role="listbox"
+                  aria-label="Valutalista"
+                ></section>
+              </section>
+            </section>
+          </section>
+
+          <!-- Till-valuta -->
+          <section class="field">
+            <label>Till valuta</label>
+            <section
+              class="currency-field"
+              data-role="currency-field"
+              data-type="to"
+            >
+              <button
+                type="button"
+                class="currency-toggle"
+                aria-haspopup="listbox"
+                aria-expanded="false"
+              >
+                <span class="currency-toggle-main">
+                  <span class="currency-toggle-code" data-current-code="to">
+                    USD
+                  </span>
+                  <span class="currency-toggle-name" data-current-name="to">
+                    United States dollar
+                  </span>
+                </span>
+                <span class="currency-toggle-caret">▾</span>
+              </button>
+
+              <section class="currency-dropdown" hidden>
+                <label class="currency-search-label">
+                  <span>Sök valuta</span>
+                  <input
+                    type="text"
+                    class="currency-search"
+                    placeholder="t.ex. USD, dollar, krona..."
+                    autocomplete="off"
+                  />
+                </label>
+
+                <section
+                  class="currency-list"
+                  role="listbox"
+                  aria-label="Valutalista"
+                ></section>
+              </section>
+            </section>
+          </section>
+        </section>
+
+        <section class="row actions-row">
+          <button type="button" class="swap-button" id="swap-button">
+            ⇆ Byt plats på valutorna
+          </button>
+
+          <button type="button" class="convert-button" id="convert-button">
+            Konvertera
+          </button>
+
+          <span class="status-text" id="status-text"></span>
+        </section>
+      </form>
+
+      <section class="result-section">
+        <p class="result-main" id="result-main">–</p>
+        <p class="result-rate" id="result-rate">
+          Växelkursen visas här.
+        </p>
+
+        <p class="info-text" id="error-text"></p>
+
+        <p class="meta-text">
+          
+        </p>
+      </section>
+    </section>
+
+    <section class="page-footer">
+      <p class="footer-text">
+        <span class="footer-label">Språk:</span>
+        <a href="../index.html" class="footer-link">Suomi</a>
+        <span class="footer-separator">|</span>
+        <a href="index.html" class="footer-link footer-link--active">Svenska</a>
+        <span class="footer-separator">|</span>
+        <a href="../en/index.html" class="footer-link">English</a>
+      </p>
+
+      <p class="footer-text footer-text-secondary">
+        <a href="info.html" class="footer-link">Om webbplatsen</a>
+        &nbsp;|&nbsp;
+        <a href="privacy.html" class="footer-link">Integritet &amp; cookies</a>
+      </p>
+    </section>
+
+  </main>
+
+  <script src="../main.js" defer></script>
+</body>
+</html>

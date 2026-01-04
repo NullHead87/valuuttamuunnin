@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8" />
+
+  <title>
+    Valuuttamuunnin – Muunna euro, dollari, kruunu ja muut valuutat reaaliaikaisilla valuuttakursseilla
+  </title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description"
+        content="Suomenkielinen valuuttamuunnin ja valuuttalaskuri. Muunna euro, dollari, kruunu ja muut valuutat reaaliaikaisilla valuuttakursseilla. Helppokäyttöinen valuuttalaskuri arkeen, matkailuun ja talouden seurantaan.">
+
+  <meta name="keywords"
+        content="valuuttamuunnin, valuuttalaskuri, valuuttakurssit, euro dollari, ruotsin kruunu, norjan kruunu, muunna valuuttaa, EUR USD, SEK EUR, NOK EUR, valuutan muuntaminen">
+
+  <link rel="canonical" href="https://OMA-DOMAIN.fi/" />
+
+  <!-- Hreflang -->
+  <link rel="alternate" hreflang="fi" href="https://OMA-DOMAIN.fi/" />
+  <link rel="alternate" hreflang="sv" href="https://OMA-DOMAIN.fi/sv/" />
+  <link rel="alternate" hreflang="en" href="https://OMA-DOMAIN.fi/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://OMA-DOMAIN.fi/" />
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title"
+        content="Valuuttamuunnin – Muunna valuutat reaaliaikaisilla kursseilla" />
+  <meta property="og:description"
+        content="Helppokäyttöinen valuuttalaskuri euroille, dollareille ja kruunuvaluutoille. Ajantasaiset valuuttakurssit reaaliajassa." />
+  <meta property="og:url" content="https://OMA-DOMAIN.fi/" />
+  <meta property="og:site_name" content="Valuuttamuunnin" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page">
+
+    <header class="page-header">
+      <h1 class="site-title">Valuuttamuunnin</h1>
+      <p class="site-subtitle">
+        Muunna valuuttoja reaaliaikaisilla kursseilla (Frankfurter API).
+      </p>
+    </header>
+
+    <section class="converter-card" aria-label="Valuuttamuunnin">
+      <form class="converter-form" onsubmit="return false;">
+        <section class="row">
+          <section class="field">
+            <label for="amount">Summa</label>
+            <input
+              type="number"
+              id="amount"
+              min="0"
+              step="0.01"
+              value="100"
+              autocomplete="off"
+            />
+          </section>
+        </section>
+
+        <section class="row two-columns">
+          <!-- Lähtövaluutta -->
+          <section class="field">
+            <label>Lähtövaluutta</label>
+            <section
+              class="currency-field"
+              data-role="currency-field"
+              data-type="from"
+            >
+              <button
+                type="button"
+                class="currency-toggle"
+                aria-haspopup="listbox"
+                aria-expanded="false"
+              >
+                <span class="currency-toggle-main">
+                  <span class="currency-toggle-code" data-current-code="from">
+                    EUR
+                  </span>
+                  <span class="currency-toggle-name" data-current-name="from">
+                    Euro
+                  </span>
+                </span>
+                <span class="currency-toggle-caret">▾</span>
+              </button>
+
+              <section class="currency-dropdown" hidden>
+                <label class="currency-search-label">
+                  <span>Hae valuuttaa</span>
+                  <input
+                    type="text"
+                    class="currency-search"
+                    placeholder="Esim. EUR, euro, kruunu..."
+                    autocomplete="off"
+                  />
+                </label>
+
+                <section
+                  class="currency-list"
+                  role="listbox"
+                  aria-label="Valuuttalista"
+                ></section>
+              </section>
+            </section>
+          </section>
+
+          <!-- Kohdevaluutta -->
+          <section class="field">
+            <label>Kohdevaluutta</label>
+            <section
+              class="currency-field"
+              data-role="currency-field"
+              data-type="to"
+            >
+              <button
+                type="button"
+                class="currency-toggle"
+                aria-haspopup="listbox"
+                aria-expanded="false"
+              >
+                <span class="currency-toggle-main">
+                  <span class="currency-toggle-code" data-current-code="to">
+                    USD
+                  </span>
+                  <span class="currency-toggle-name" data-current-name="to">
+                    United States dollar
+                  </span>
+                </span>
+                <span class="currency-toggle-caret">▾</span>
+              </button>
+
+              <section class="currency-dropdown" hidden>
+                <label class="currency-search-label">
+                  <span>Hae valuuttaa</span>
+                  <input
+                    type="text"
+                    class="currency-search"
+                    placeholder="Esim. USD, dollari, kruunu..."
+                    autocomplete="off"
+                  />
+                </label>
+
+                <section
+                  class="currency-list"
+                  role="listbox"
+                  aria-label="Valuuttalista"
+                ></section>
+              </section>
+            </section>
+          </section>
+        </section>
+
+        <section class="row actions-row">
+          <button type="button" class="swap-button" id="swap-button">
+            ⇆ Vaihda valuutat
+          </button>
+
+          <button type="button" class="convert-button" id="convert-button">
+            Laske
+          </button>
+
+          <span class="status-text" id="status-text"></span>
+        </section>
+      </form>
+
+      <section class="result-section">
+        <p class="result-main" id="result-main">–</p>
+        <p class="result-rate" id="result-rate">
+          Kurssi näytetään tässä.
+        </p>
+
+        <p class="info-text" id="error-text"></p>
+
+        <p class="meta-text">
+          
+        </p>
+      </section>
+    </section>
+
+    <!-- FOOTER-LINKIT -->
+    <section class="page-footer">
+      <p class="footer-text">
+        <span class="footer-label">Kieli:</span>
+        <a href="index.html" class="footer-link footer-link--active">Suomi</a>
+        <span class="footer-separator">|</span>
+        <a href="sv/index.html" class="footer-link">Svenska</a>
+        <span class="footer-separator">|</span>
+        <a href="en/index.html" class="footer-link">English</a>
+      </p>
+
+      <p class="footer-text footer-text-secondary">
+        <a href="info.html" class="footer-link">Tietoa sivustosta</a>
+        &nbsp;|&nbsp;
+        <a href="privacy.html" class="footer-link">Tietosuoja &amp; evästeet</a>
+      </p>
+    </section>
+
+  </main>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
